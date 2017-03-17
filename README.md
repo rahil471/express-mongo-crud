@@ -1,5 +1,5 @@
 # express-mongo-crud
-Instantly add crud apis for your mongoose express application. You only need to define the models and include the middleware. The CRUD apis exposed can be used in conjunction with your existing or new APIs.
+Express middleware to instantly add crud apis for your mongoose express application. You only need to define the models and include the middleware. The CRUD apis exposed can be used in conjunction with your existing or new APIs.
 
 # Usage
 

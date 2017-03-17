@@ -7,9 +7,39 @@ Instantly add crud apis for your mongoose express application. You only need to 
 
 `npm i express-mongo-crud --save`
 
+## Middleware
+
+
+```
+var express = require('express');
+var app = express();
+var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
+var PORT = 3000;
+
+// REQUIRE MIDDLEWARE
+var instantMongoCrud = require('express-mongo-crud'); // require the module
+
+
+
+mongoose.connect('localhost:27017/mongocrud');
+
+var options = { //specify options
+	host: `localhost:${PORT}`
+}
+
+//USE AS MIDDLEWARE
+app.use(bodyParser.json()); // add body parser
+app.use(instantMongoCrud(options)); // use as middleware
+
+app.listen(PORT, ()=>{
+	console.log('started');
+})
+```
+
 ## Models
 
-By default the express-mongo-crud will look for models directory in the root path (ie: as the same level on node_modules). express-mongo-crud will expose CRUD APIs for any model added to this directory. 
+By default the express-mongo-crud will look for *models* directory in the root path (ie: as the same level on `node_modules`). express-mongo-crud will expose CRUD APIs for any model added to this directory. 
 
 A model file should follow the following convention. 
 `<modelname>.model.js`
@@ -44,31 +74,6 @@ module.exports = function(mongoose){
 };
 ```
 
-## Middleware
-
-
-```
-var express = require('express');
-var app = express();
-var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
-var PORT = 3000;
-
-var instantMongoCrud = require('express-mongo-crud'); // require the module
-
-mongoose.connect('localhost:27017/mongocrud');
-
-var options = { //specify options
-	host: `localhost:${PORT}`
-}
-
-app.use(bodyParser.json()); // add body parser
-app.use(instantMongoCrud(options)); // use as middleware
-
-app.listen(PORT, ()=>{
-	console.log('started');
-})
-```
 
 ## APIs
 The following APIs are supported for now.
@@ -85,6 +90,7 @@ The following APIs are supported for now.
 - configurable models directory
 - proper error handling
 - Support for mongoose populate in list
-- Adding prefix path 
+- Adding prefix path
+- Advance swagger documentation - Per model grouping/taging for swagger
  
  

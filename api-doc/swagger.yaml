@@ -1,0 +1,904 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Accion User Management
+# during dev, should point to your local machine
+host: oodebe.com:7000
+# basePath prefixes all resource paths
+basePath: /user-management
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /createAccount:
+     # binds a127 app logic to a route
+    x-swagger-router-controller: user
+    post:
+      tags:
+        - user
+      description: Create new user account
+      # used as the method name of the controller
+      operationId: createAccount
+      parameters:
+        - name: body
+          in: body
+          description: Post request body
+          required: true
+          schema:
+            $ref: "#/definitions/CreateAccountBody"
+        - name: x-access-token
+          in: header
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/DefaultSuccessResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/DefaultErrorResponse"
+  
+  /editAccount:
+     # binds a127 app logic to a route
+    x-swagger-router-controller: user
+    post:
+      tags:
+        - user
+      description: Update user account
+      # used as the method name of the controller
+      operationId: editAccount
+      parameters:
+        - name: body
+          in: body
+          description: Post request body
+          required: true
+          schema:
+            $ref: "#/definitions/EditAccountBody"
+        - name: x-access-token
+          in: header
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/DefaultSuccessResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/DefaultErrorResponse"
+            
+  /getAccounts:
+     # binds a127 app logic to a route
+    x-swagger-router-controller: user
+    post:
+      tags:
+        - user
+      description: Get User Account/Accounts
+      # used as the method name of the controller
+      operationId: getAccounts
+      parameters:
+        - name: body
+          in: body
+          description: Post request body, pass email to fetch one account, pass blank for retrieving all.
+          required: false
+          schema:
+            $ref: "#/definitions/GetAccountBody"
+        - name: x-access-token
+          in: header
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/GetAccountSuccessResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/DefaultErrorResponse"
+            
+  /getRolesPrivileges:
+     # binds a127 app logic to a route
+    x-swagger-router-controller: user
+    get:
+      tags:
+        - role
+      description: Get Active User Role
+      # used as the method name of the controller
+      operationId: getRolesPrivileges
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/getRolesPrivilegesSuccessResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/DefaultErrorResponse"
+            
+  /checkAccess:
+     # binds a127 app logic to a route
+    x-swagger-router-controller: user
+    get:
+      tags:
+        - role
+      description: Get Active User Role
+      # used as the method name of the controller
+      operationId: checkAccess
+      parameters:
+        - name: body
+          in: body
+          description: acessName
+          required: true
+          schema: 
+            required:
+              - accessName
+            properties:
+              accessName:
+                type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/getRolesPrivilegesSuccessResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/DefaultErrorResponse"          
+            
+  /authenticate:
+     # binds a127 app logic to a route
+    x-swagger-router-controller: user
+    post:
+      tags:
+        - user
+      description: Get User Account/Accounts
+      # used as the method name of the controller
+      operationId: authenticate
+      parameters:
+        - name: body
+          in: body
+          description: Post request body
+          required: false
+          schema:
+            $ref: "#/definitions/AuthenticateBody"
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/AuthenticateSuccessResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/DefaultErrorResponse"
+  /forgotPassword:
+     # binds a127 app logic to a route
+    x-swagger-router-controller: userpassword
+    post:
+      tags:
+        - user
+      description: Sends reset password link
+      # used as the method name of the controller
+      operationId: forgotPassword
+      parameters:
+        - name: body
+          in: body
+          description: User email
+          required: true
+          schema: 
+            required:
+              - email
+            properties:
+              email:
+                type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/DefaultSuccessResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/DefaultErrorResponse"
+  /validateLinkToken:
+     # binds a127 app logic to a route
+    x-swagger-router-controller: userpassword
+    post:
+      tags:
+        - user
+      description: Validate Token for reseting password
+      # used as the method name of the controller
+      operationId: validateLinkToken
+      parameters:
+        - name: body
+          in: body
+          description: User email
+          required: true
+          schema: 
+            required:
+              - token
+            properties:
+              token:
+                type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/DefaultSuccessResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/DefaultErrorResponse"
+  /resetPassword:
+     # binds a127 app logic to a route
+    x-swagger-router-controller: userpassword
+    post:
+      tags:
+        - user
+      description: Validate Token for reseting password
+      # used as the method name of the controller
+      operationId: resetPassword
+      parameters:
+        - name: body
+          in: body
+          description: User email
+          required: true
+          schema: 
+            required:
+              - newPassword
+              - token
+            properties:
+              newPassword:
+                type: string
+              token:
+                type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/DefaultSuccessResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/DefaultErrorResponse"
+  /changePassword:
+     # binds a127 app logic to a route
+    x-swagger-router-controller: userpassword
+    post:
+      tags:
+        - user
+      description: Change User password
+      # used as the method name of the controller
+      operationId: changePassword
+      parameters:
+        - name: body
+          in: body
+          description: Body
+          required: true
+          schema: 
+            required:
+              - newPassword
+            properties:
+              newPassword:
+                type: string
+        - name: x-access-token
+          in: header
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/DefaultSuccessResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/DefaultErrorResponse"
+            
+  /changeAccountStatus:
+    post:
+      tags:
+        - user
+      description: changeAccountStatus
+      operationId: changeAccountStatus
+      parameters:
+        - name: body
+          in: body
+          description: Post request body
+          required: true
+          schema:
+            required:
+            - _id
+            properties:
+              _id:
+                type: string
+              data:
+                type: object
+                required:
+                  - status
+                properties:
+                  status: 
+                    type: string
+               
+                     
+            description: Pass blank to fetch all roles
+        - name: x-access-token
+          in: header
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/DefaultSuccessResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/DefaultErrorResponse"          
+            
+  /deleteAccount:
+    post:
+      tags:
+        - user
+      description: deleteAccount
+      operationId: deleteAccount
+      parameters:
+        - name: body
+          in: body
+          description: Post request body
+          required: true
+          schema:
+            required:
+            - _id
+            properties:
+              _id:
+                type: string
+              data:
+                type: object
+                required:
+                  - status
+                properties:
+                  status: 
+                    type: string
+               
+                     
+            description: Pass blank to fetch all roles
+        - name: x-access-token
+          in: header
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/DefaultSuccessResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/DefaultErrorResponse"          
+                    
+            
+  /assignRole:
+    post:
+      tags:
+        - role
+        - user
+      description: Assign a role to a user
+      parameters:
+        - name: body
+          in: body
+          description: Post request body
+          required: true
+          schema:
+            required:
+              - roleName
+              - email
+            properties:
+              roleName:
+                type: string
+                description: Role to assign
+              email:
+                type: string
+              force:
+                type: boolean
+                description: Optional, if true overwrites the esisting role
+        - name: x-access-token
+          in: header
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/DefaultSuccessResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/DefaultErrorResponse"
+  /listRoles:
+    post:
+      tags:
+        - role
+      description: List Roles
+      parameters:
+        - name: body
+          in: body
+          description: Post request body
+          required: true
+          schema:
+            properties:
+              roleName:
+                type: string
+            description: Pass blank to fetch all roles
+        - name: x-access-token
+          in: header
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/DefaultSuccessResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/DefaultErrorResponse"
+  /addRole:
+    post:
+      tags:
+        - role
+      description: Create new role
+      parameters:
+        - name: body
+          in: body
+          description: Post request body
+          required: true
+          schema:
+            required:
+              - roleName
+              - privileges
+            properties:
+              roleName:
+                type: string
+              desc:
+                type: string
+              privileges:
+                type: array
+                items:
+                  type: string
+                description: Array of priviliges Ids
+        - name: x-access-token
+          in: header
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/DefaultSuccessResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/DefaultErrorResponse"
+  /editRole:
+    post:
+      tags:
+        - role
+      description: Edits role name, assign/remove a privilege to a role
+      parameters:
+        - name: body
+          in: body
+          description: Post request body
+          required: true
+          schema:
+            required:
+              - roles
+            properties:
+              roles:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - id
+                    - roleName
+                    - desc
+                    - privileges
+                  properties:
+                    roleName:
+                      type: string
+                    id:
+                      type: string
+                      description: Id of the role to edit
+                    desc:
+                      type: string
+                    privileges:
+                      type: array
+                      items:
+                        type: string 
+                        description: IDs for privileges
+                      description: Array of privilege Ids, Requires to send all privileges and not only the ones removed/added
+        - name: x-access-token
+          in: header
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/DefaultSuccessResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/DefaultErrorResponse"
+  /listPrivileges:
+    post:
+      tags:
+        - role
+      description: List Privileges
+      parameters:
+        - name: body
+          in: body
+          description: Post request body
+          required: true
+          schema:
+            properties:
+              name:
+                type: string
+            description: Pass blank to fetch all Privileges
+        - name: x-access-token
+          in: header
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            properties:
+              privileges:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                    name:
+                      type: string
+                    desc:
+                      type: string
+              responsesMessage:
+                type: string
+                default: Success
+              responseCode:
+                type: number
+                default: 0
+            description: Pass blank to fetch all Privileges
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/DefaultErrorResponse"
+  /addPrivilege:
+    post:
+      tags:
+        - role
+      description: Create new privilege
+      parameters:
+        - name: body
+          in: body
+          description: Post request body
+          required: true
+          schema:
+            required:
+              - name
+              - displayName
+            properties:
+              name:
+                type: string
+              desc:
+                type: string
+              displayName:
+                type: string
+                description: Pretty name to be displayed
+        - name: x-access-token
+          in: header
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/DefaultSuccessResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/DefaultErrorResponse"
+  /addProspect:
+    x-swagger-router-controller: user
+    post:
+      tags:
+        - misc
+      description: Capture prospect emails.
+      operationId: prospect
+      parameters:
+        - name: email
+          in: body
+          description: User Email
+          required: true
+          schema:
+            required:
+              - email
+            properties:
+              email:
+                type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/DefaultSuccessResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/DefaultErrorResponse"
+            
+  /swagger:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+  CreateAccountBody:
+    required:
+      - firstName
+      - lastName
+      - email
+      - password
+      - role
+    properties:
+      givenName:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      role:
+        type: string
+      customData:
+        type: object
+        description: Any extra data required to stored, eg - contact, org
+  EditAccountBody:
+      required:
+        - _id
+        - data
+      properties:
+        _id:
+          type: string
+        data:
+          type: object
+          required:
+            - givenName
+            - firstName
+            - lastName
+            - role
+            - customData
+          properties:
+            givenName:
+              type: string
+            firstName:
+              type: string
+            lastName:
+              type: string
+            role:
+              type: string
+            customData:
+              type: object
+              description: Any extra data required to stored, eg - contact, org
+  GetAccountBody:
+    properties:
+      email:
+        type: string
+  GetAccountSuccessResponse:
+    required:
+      - users
+      - responseCode
+      - responseMessage
+    properties:
+      users:
+        type: array
+        items:
+          type: object
+          properties:
+            givenName:
+              type: string
+            firstName:
+              type: string
+            lastName:
+              type: string
+            email:
+              type: string
+            role:
+              type: string
+            customData:
+              type: object
+            rolesData:
+              type: object
+              properties:
+                _id:
+                  type: string
+                roleName:
+                  type: string
+                priviliges:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                      desc:
+                        type: string
+                      name:
+                        type: string
+      responseCode:
+        type: integer
+        default: 0
+      responseMessage:
+        type: string
+        default: Success
+  AuthenticateBody:
+    required:
+      - email
+      - password
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+  AuthenticateSuccessResponse:
+    required:
+      - responseCode
+      - responseMessage
+    properties:
+      user:
+        type: object
+        properties:
+          givenName:
+            type: string
+          firstName:
+            type: string
+          lastName:
+            type: string
+          email:
+            type: string
+          role:
+            type: string
+          customData:
+            type: object
+          rolesData: 
+            type: object
+            properties:
+              _id:
+                type: string
+              roleName: 
+                type: string
+              priviliges:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                    desc:
+                      type: string
+                    name:
+                      type: string
+      token:
+        type: string
+      responseCode:
+        type: integer
+        default: 0
+      responseMessage:
+        type: string
+        default: Success
+  DefaultSuccessResponse:
+    required:
+      - responseCode
+      - responseMessage
+    properties:
+      responseCode:
+        type: integer
+        default: 0
+      responseMessage:
+        type: string
+        default: Success
+  DefaultErrorResponse:
+    required:
+      - responseCode
+      - responseMessage
+    properties:
+      responseCode:
+        type: integer
+        default: 1
+      responseMessage:
+        type: string
+        default: Error
+
+  getRolesPrivilegesSuccessResponse:
+      properties:
+        appRolesPrivileges:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              roleName:
+                type: string
+              desc:
+                type: string
+
+              priviliges:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                        desc:
+                          type: string
+                        name:
+                          type: string
+        responseCode:
+          type: integer
+          default: 0
+        responseMessage:
+          type: string
+          default: Success
+

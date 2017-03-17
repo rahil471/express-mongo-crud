@@ -1,8 +1,8 @@
 {
-  "name": "instant-mongo-crud",
+  "name": "express-mongo-crud",
   "version": "1.0.0",
   "description": "An express middleware to dynamically add mongo crud APIs for mongoose models",
-  "main": "main.js",
+  "main": "index.js",
   "scripts": {
     "test": "npm test"
   },
@@ -12,7 +12,8 @@
     "mongoose",
     "middleware",
     "dynamic-mongo-crud",
-    "instant-mongo-crud"
+    "instant-mongo-crud",
+    "express-mongo-crud"
   ],
   "author": "Rahil Shaikh",
   "license": "MIT",
@@ -20,6 +21,10 @@
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "express-router": "0.0.1",
-    "mongoose": "^4.9.0"
+    "mongoose": "^4.9.0",
+    "swagger-jsdoc": "^1.9.2"
+  },
+  "devDependencies": {
+    "jsdoc": "^3.4.3"
   }
 }

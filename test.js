@@ -7,9 +7,13 @@ var instantMongoCrud = require('./index');
 
 mongoose.connect('localhost:27017/mongocrud')
 
-app.use(bodyParser.json());
-app.use(instantMongoCrud(null));
+var options = {
+	host: "localhost:3001"
+}
 
-app.listen('3000', ()=>{
+app.use(bodyParser.json());
+app.use(instantMongoCrud(options));
+
+app.listen('3001', ()=>{
 	console.log('started');
 })

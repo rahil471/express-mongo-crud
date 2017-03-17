@@ -1,0 +1,19 @@
+{
+    "tags": {
+        "allowUnknownTags": true,
+        "dictionaries": ["jsdoc","closure"]
+    },
+    "source": {
+        "include": ["./lib/crud.js", "./lib/ModelBuilder.js"]
+    },
+    "opts":{
+        "destination": "./jsdoc",
+        "encoding": "utf8",
+        "template": "templates/default"
+    },
+    "plugins": [],
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": false
+    }
+}

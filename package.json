@@ -1,10 +1,15 @@
 {
   "name": "express-mongo-crud",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "An express middleware to dynamically add mongo crud APIs for mongoose models",
   "main": "index.js",
   "scripts": {
     "test": "npm test"
+  },
+  "repository" :
+  { 
+    "type" : "git",
+    "url" : "https://github.com/rahil471/express-mongo-crud.git"
   },
   "keywords": [
     "expressjs",
@@ -17,6 +22,11 @@
   ],
   "author": "Rahil Shaikh",
   "license": "MIT",
+  "bugs":{
+    "url": "https://github.com/rahil471/express-mongo-crud/issues",
+    "email": "rahilsk47@gmail.com"
+  },
+  "homepage": "https://github.com/rahil471/express-mongo-crud",
   "dependencies": {
     "body-parser": "^1.17.1",
     "chalk": "^1.1.3",

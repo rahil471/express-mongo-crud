@@ -86,6 +86,8 @@ The following APIs are supported for now.
 ## Swagger Suite
  The project provides a swagger suite and would be made availaible at `<host>/apidoc`
  
+ ![ScreenShot](https://raw.githubusercontent.com/rahil471/express-mongo-crud/master/assets/swagger.JPG)
+ 
 ## Todos
 - configurable models directory
 - proper error handling

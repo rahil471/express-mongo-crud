@@ -19,6 +19,7 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.17.1",
+    "chalk": "^1.1.3",
     "express": "^4.15.2",
     "express-router": "0.0.1",
     "mongoose": "^4.9.0",

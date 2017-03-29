@@ -1,6 +1,9 @@
 # express-mongo-crud
 Express middleware to instantly add crud apis for your mongoose express application. You only need to define the models and include the middleware. The CRUD apis exposed can be used in conjunction with your existing or new APIs.
 
+## Tutorial
+https://ciphertrick.com/2017/03/29/easily-add-mongo-crud-apis-nodejs-express-project/
+
 # Usage
 
 ## Installation

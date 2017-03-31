@@ -4,7 +4,6 @@
   "description": "An express middleware to dynamically add mongo crud APIs for mongoose models",
   "main": "index.js",
   "scripts": {
-    "test": "npm test",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {

@@ -2,7 +2,7 @@ var express = require('express')
     , router = express.Router();
 var swaggerJSDoc = require('swagger-jsdoc');
 var path = require('path');
-var ModelBuilder = require('./lib/ModelBuilder');
+var ModelBuilder = require('./lib/ModelBuilder'); 
 var logger = require('./lib/logger');
 //var loadmodels = new ModelBuilder();
 

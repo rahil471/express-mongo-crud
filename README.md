@@ -96,6 +96,8 @@ The following APIs are supported for now.
 - proper error handling
 - Support for mongoose populate in list
 - Adding prefix path
-- Advance swagger documentation - Per model grouping/taging for swagger
+- ~~Advance swagger documentation - Per model grouping/taging for swagger~~
+- Configure project name in swagger doc
+- Support for joi validations
  
  

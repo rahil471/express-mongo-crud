@@ -52,3 +52,5 @@ module.exports = function(options){
     router.use('/', require('./lib/routes'));
 	return router;
 }
+
+module.exports.models = ModelBuilder.getCompiledModels();
